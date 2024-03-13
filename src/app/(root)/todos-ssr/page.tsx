@@ -1,20 +1,10 @@
-type Todo = {
-  id: string;
-  title: string;
-  content: string;
-  isDone: boolean;
-};
+import { Todo } from "@/types/todos";
 
-const fetchData = async () => {
+async function TodosSSRPage() {
   const response = await fetch("http://localhost:4000/todos", {
     cache: "no-cache",
   });
   const data: Todo[] = await response.json();
-  return data;
-};
-
-async function TodosSSRPage() {
-  const data = await fetchData();
 
   return (
     <>
@@ -23,6 +13,7 @@ async function TodosSSRPage() {
           return (
             <li key={todo.id}>
               {todo.title}-{todo.content}
+              <span>{todo.isDone ? "완료" : "미완료"}</span>
             </li>
           );
         })}
