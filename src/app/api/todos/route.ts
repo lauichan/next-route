@@ -1,4 +1,4 @@
-import { Todo } from "@/types/todos";
+import { NewTodo, Todo } from "@/types/todos";
 
 export async function GET(request: Request) {
   const response = await fetch("http://localhost:4000/todos");
@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { title, content } = await request.json();
+  const { title, content }: NewTodo = await request.json();
 
   const response = await fetch("http://localhost:4000/todos", {
     method: "POST",
@@ -26,4 +26,32 @@ export async function POST(request: Request) {
   const todo = await response.json();
 
   return Response.json({ todo });
+}
+
+export async function PATCH(request: Request) {
+  const updated: Todo = await request.json();
+
+  const response = await fetch(`http://localhost:4000/todos/${updated.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(updated),
+  });
+
+  const todo = await response.json();
+
+  return Response.json({ todo });
+}
+
+export async function DELETE(request: Request) {
+  const id: Todo["id"] = await request.json();
+
+  await fetch(`http://localhost:4000/todos/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
