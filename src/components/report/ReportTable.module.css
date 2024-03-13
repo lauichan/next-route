@@ -1,0 +1,11 @@
+.table {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.table :is(td, th) {
+  padding: 0.5rem;
+  background-color: #f6f8fa;
+}
