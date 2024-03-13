@@ -1,4 +1,5 @@
 import { Todo } from "@/types/todos";
+import styles from "./ReportTable.module.css";
 
 async function ReportTable() {
   const response = await fetch("http://localhost:3000/api/todos", {
@@ -9,11 +10,11 @@ async function ReportTable() {
   const { data: todos }: { data: Todo[] } = await response.json();
 
   const totalCount = todos.length;
-  const workingCount = todos.filter((todo) => todo.isDone === false).length;
+  const workingCount = todos.filter((todo) => !todo.isDone).length;
   const doneCount = totalCount - workingCount;
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>할일</th>

@@ -1,5 +1,6 @@
 import { useAddTodo } from "@/lib/todos/mutations";
 import { FormEvent } from "react";
+import styles from "./TodoForm.module.css";
 
 function TodoForm() {
   const { mutate: addTodo } = useAddTodo();
@@ -17,8 +18,8 @@ function TodoForm() {
   };
 
   return (
-    <form onSubmit={handleSubmitTodo}>
-      <input name="task" type="text" />
+    <form className={styles.form} onSubmit={handleSubmitTodo}>
+      <input name="task" type="text" placeholder="제목" />
       <textarea name="detail" placeholder="내용"></textarea>
       <button>추가하기</button>
     </form>

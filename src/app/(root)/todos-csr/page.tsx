@@ -1,6 +1,7 @@
 "use client";
-import TodoForm from "@/components/todos/TodoForm";
-import TodoList from "@/components/todos/TodoList";
+
+import TodoCards from "@/components/todos/TodoCards/TodoCards";
+import TodoForm from "@/components/todos/TodoForm/TodoForm";
 import { useTodosQuery } from "@/lib/todos/query";
 import { Todo } from "@/types/todos";
 import { useRouter } from "next/navigation";
@@ -22,8 +23,8 @@ function TodosCSRPage() {
     <>
       <button onClick={goToReportPage}>할일정보통계보러가기</button>
       <TodoForm />
-      <TodoList list={workingList} />
-      <TodoList list={doneList} />
+      <TodoCards title="진행중" list={workingList} />
+      <TodoCards title="완료" list={doneList} />
     </>
   );
 }

@@ -1,4 +1,10 @@
 import { CompanyInfo } from "@/types/companyInfo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "소개 페이지",
+};
 
 async function AboutPage() {
   const response = await fetch("http://localhost:3000/api/company");
