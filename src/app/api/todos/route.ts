@@ -1,7 +1,9 @@
 import { NewTodo, Todo } from "@/types/todos";
 
+const ENDPOINT = "http://localhost:4000/todos";
+
 export async function GET(request: Request) {
-  const response = await fetch("http://localhost:4000/todos");
+  const response = await fetch(`${ENDPOINT}`);
   const todos: Todo[] = await response.json();
 
   if (!todos) {
@@ -14,7 +16,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const { title, content }: NewTodo = await request.json();
 
-  const response = await fetch("http://localhost:4000/todos", {
+  const response = await fetch(`${ENDPOINT}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +32,7 @@ export async function POST(request: Request) {
 export async function PATCH(request: Request) {
   const updated: Todo = await request.json();
 
-  const response = await fetch(`http://localhost:4000/todos/${updated.id}`, {
+  const response = await fetch(`${ENDPOINT}/${updated.id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +48,7 @@ export async function PATCH(request: Request) {
 export async function DELETE(request: Request) {
   const id: Todo["id"] = await request.json();
 
-  const response = await fetch(`http://localhost:4000/todos/${id}`, {
+  const response = await fetch(`${ENDPOINT}/${id}`, {
     method: "DELETE",
   });
 
