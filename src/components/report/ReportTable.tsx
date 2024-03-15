@@ -2,12 +2,12 @@ import { Todo } from "@/types/todos";
 import styles from "./ReportTable.module.css";
 
 async function ReportTable() {
-  const response = await fetch("http://localhost:3000/api/todos", {
+  const response = await fetch("http://localhost:4000/todos", {
     next: {
       revalidate: 10,
     },
   });
-  const { data: todos }: { data: Todo[] } = await response.json();
+  const todos: Todo[] = await response.json();
 
   const totalCount = todos.length;
   const workingCount = todos.filter((todo) => !todo.isDone).length;

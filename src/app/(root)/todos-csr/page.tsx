@@ -7,7 +7,7 @@ import { Todo } from "@/types/todos";
 import { useRouter } from "next/navigation";
 
 function TodosCSRPage() {
-  const { data = [], isLoading } = useTodosQuery();
+  const { data = [], isLoading, isError, error } = useTodosQuery();
 
   const workingList: Todo[] = data.filter((todo) => !todo.isDone);
   const doneList: Todo[] = data.filter((todo) => todo.isDone);
@@ -18,6 +18,8 @@ function TodosCSRPage() {
   };
 
   if (isLoading) return <div>로딩중...</div>;
+
+  if (isError) return <div>{error.message}</div>;
 
   return (
     <>
