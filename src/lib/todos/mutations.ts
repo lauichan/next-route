@@ -1,10 +1,10 @@
-import { queryClient } from "@/app/provider";
 import { NewTodo, Todo } from "@/types/todos";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "./query.keys";
 import { API_ENDPOINT } from "./query";
 
 export const useAddTodo = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: NewTodo) => {
       return await fetch(`${API_ENDPOINT}`, {
@@ -22,6 +22,7 @@ export const useAddTodo = () => {
 };
 
 export const useUpdateTodo = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: Todo) => {
       return await fetch(`${API_ENDPOINT}`, {
@@ -39,6 +40,7 @@ export const useUpdateTodo = () => {
 };
 
 export const useDeleteTodo = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: Todo["id"]) => {
       return await fetch(`${API_ENDPOINT}`, {
